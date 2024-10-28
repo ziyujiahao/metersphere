@@ -85,7 +85,7 @@ public class ApiFileUtil extends FileUtils {
 
             for (int i = 0; i < bodyUploadIds.size(); i++) {
                 MultipartFile bodyFile = bodyFiles.get(i);
-                fileManagerService.upload(bodyFile, getRequest(bodyUploadIds.get(i), bodyFile.getOriginalFilename()));
+                fileManagerService.upload(bodyFile, getRequest(bodyUploadIds.get(i)));
             }
         }
     }
