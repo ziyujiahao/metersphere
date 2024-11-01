@@ -15,7 +15,7 @@
           <el-radio-button
             v-for="(item, index) in platforms"
             :key="index"
-            v-if="!isScenarioModel || item.name !== 'Swagger'"
+            v-show="!isScenarioModel || item.name !== 'Swagger'"
             :label="item.value"
             >{{ item.name }}</el-radio-button
           >
