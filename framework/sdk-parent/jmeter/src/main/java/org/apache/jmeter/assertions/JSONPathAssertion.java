@@ -303,7 +303,7 @@ public class JSONPathAssertion extends AbstractTestElement implements Serializab
             try {
                 doAssert(responseData);
             } catch (Exception e) {
-                log.debug("Assertion failed", e);
+                log.error("Assertion failed", e);
                 result.setFailure(true);
                 result.setFailureMessage(e.getMessage());
             }
@@ -344,7 +344,7 @@ public class JSONPathAssertion extends AbstractTestElement implements Serializab
 
     @Override
     public void threadStarted() {
-        // nothing to do on thread start
+        LoggerUtil.info("Thread started：{}", this.getName());
     }
 
     @Override
