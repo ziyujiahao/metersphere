@@ -238,17 +238,11 @@ public class JmeterDocumentParser implements EngineSourceParser {
     }
 
     private void processCriticalSectionController(Element element) {
-        Element parent = element.getParent();
-        Element hashTree = getNextSibling(element);
-//        删除CriticalSectionController 和 hashTree
-        element.detach();
-        hashTree.detach();
-//        添加一个LogicController
-        Element sampleController = parent.addElement("GenericController");
-        sampleController.addAttribute("guiclass", "LogicControllerGui");
-        sampleController.addAttribute("testclass", "GenericController");
-        sampleController.addAttribute("testname", element.attributeValue("testname"));
-        parent.add(hashTree);
+        element.setName("GenericController");
+        element.addAttribute("guiclass", "LogicControllerGui");
+        element.addAttribute("testclass", "GenericController");
+        element.addAttribute("testname", element.attributeValue("testname").replace("Csc_", ""));
+        removeChildren(element);
     }
 
 
