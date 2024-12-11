@@ -156,6 +156,7 @@ public class JmeterDocumentParser implements EngineSourceParser {
         cacheKeyNode.setText(cacheScript ? "true" : "false");
 
     }
+
     private void processThreadType(Element ele) {
         Object threadType = context.getProperty("threadType");
         if (threadType instanceof List) {
@@ -239,15 +240,15 @@ public class JmeterDocumentParser implements EngineSourceParser {
     private void processCriticalSectionController(Element element) {
         Element parent = element.getParent();
         Element hashTree = getNextSibling(element);
+//        删除CriticalSectionController 和 hashTree
         element.detach();
-        if (hashTree != null) {
-            // 提升hashTree的子内容
-            for (Iterator<Element> childIterator = hashTree.elementIterator(); childIterator.hasNext(); ) {
-                Element child = childIterator.next();
-                parent.add(child.createCopy());
-            }
-        }
         hashTree.detach();
+//        添加一个LogicController
+        Element sampleController = parent.addElement("GenericController");
+        sampleController.addAttribute("guiclass", "LogicControllerGui");
+        sampleController.addAttribute("testclass", "GenericController");
+        sampleController.addAttribute("testname", element.attributeValue("testname"));
+        parent.add(hashTree);
     }
 
 
@@ -387,6 +388,7 @@ public class JmeterDocumentParser implements EngineSourceParser {
             item.setText(String.valueOf(BooleanUtils.toBoolean(recycle)));
         }
     }
+
     private void splitCsvFile(Node item) throws IOException {
         String filename = item.getText();
         filename = StringUtils.removeStart(filename, "/test/");
