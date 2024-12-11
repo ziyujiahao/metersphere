@@ -130,7 +130,7 @@ public class JmeterDocumentParser implements EngineSourceParser {
                     processResultCollector(ele);
                 } else if (ele.getName().endsWith(CRITICAL_SECTION_CONTROLLER)) {
                     // 性能测试不需要这些
-                    processResultCollector(ele);
+                    processCriticalSectionController(ele);
                 } else if (CollectionUtils.containsAny(SCRIPTS, ele.getName())) {
                     this.elementCacheScript(ele);
                 }
@@ -233,6 +233,20 @@ public class JmeterDocumentParser implements EngineSourceParser {
     private void processResultCollector(Element element) {
         Element hashTree = getNextSibling(element);
         element.detach();
+        hashTree.detach();
+    }
+
+    private void processCriticalSectionController(Element element) {
+        Element parent = element.getParent();
+        Element hashTree = getNextSibling(element);
+        element.detach();
+        if (hashTree != null) {
+            // 提升hashTree的子内容
+            for (Iterator<Element> childIterator = hashTree.elementIterator(); childIterator.hasNext(); ) {
+                Element child = childIterator.next();
+                parent.add(child.createCopy());
+            }
+        }
         hashTree.detach();
     }
 
