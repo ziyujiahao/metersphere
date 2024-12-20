@@ -77,7 +77,7 @@
                        @click="loadFile()"/>
       <span style="margin-left: 15px;">{{$t('performance_test.basic_config_file_limit_tip')}}</span>
     </el-row>
-    <el-table class="basic-config" :data="tableData">
+    <el-table class="basic-config" :data="pagedData">
       <el-table-column
         prop="name"
         :label="$t('load_test.file_name')">
@@ -109,7 +109,7 @@
         </template>
       </el-table-column>
     </el-table>
-
+    <ms-table-pagination :current-page.sync="currentPage" :page-size.sync="pageSize" :total="tableData.length"/>
     <exist-files ref="existFiles"
                  @fileChange="fileChange"
                  :test-id="test.id"
@@ -166,7 +166,7 @@ export default {
       tableData: [],
       uploadList: [],
       metadataIdList: [],
-      fileNumLimit: 50,
+      fileNumLimit: 100,
       threadGroups: [],
       loadFileVisible: false,
       currentPage: 1,
@@ -191,6 +191,12 @@ export default {
         },
       ]
     };
+  },
+  computed: {
+    pagedData() {
+      const start = (this.currentPage - 1) * this.pageSize;
+      return this.tableData.slice(start, start + this.pageSize);
+    }
   },
   created() {
     if (this.test.id) {
