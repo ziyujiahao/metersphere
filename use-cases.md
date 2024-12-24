@@ -9,5 +9,6 @@
 - [中国移动上研院基于MeterSphere构建规范化测试体系](https://blog.fit2cloud.com/?p=3465)
 - [360借助MeterSphere提升自动化测试水平](https://blog.fit2cloud.com/?p=2366)
 - [杭银消费金融基于MeterSphere开展接口自动化测试](https://blog.fit2cloud.com/?p=27d0330c-6b20-47e6-8e51-99885c4cc473)
-- TBD
+- [社区分享｜易快报基于MeterSphere的接口自动化项目落地实践](https://blog.fit2cloud.com/?p=cf3c6a38-5012-4b0c-928f-95ddfc755808))
+
 
