@@ -8,3 +8,4 @@
 - [众乐邦将MeterSphere持续测试平台融入DevOps流水线](https://blog.fit2cloud.com/?p=73d8d966-a500-422b-bdcd-3bee9491c52e)
 - [中国移动上研院基于MeterSphere构建规范化测试体系](https://blog.fit2cloud.com/?p=3465)
 - TBD
+- [360借助MeterSphere提升自动化测试水平](https://blog.fit2cloud.com/?p=2366)
